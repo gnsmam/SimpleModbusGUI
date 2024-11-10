@@ -59,8 +59,8 @@ class SimpleGui():
         print(self.slave_address)
 
         self.delete_all_onscreen_widgets()
-        button1 = Button(master=self.main_frame, text="Simple Monitoring", font = ("Arial", 20), command=self.Simple_monitoring_button) #!button
-        button2 = Button(master=self.main_frame,  text="Other functions", font = ("Arial", 20), command=self.Other_functions_button) #!button2
+        button1 = Button(master=self.main_frame, text="Simple Monitoring", font = ("Arial", 15), command=self.Simple_monitoring_button) #!button
+        button2 = Button(master=self.main_frame,  text="Other functions", font = ("Arial", 15), command=self.Other_functions_button) #!button2
         button1.grid(row=0, column=0, pady=5)
         button2.grid(row=1, column=0, pady=5)
         close_button = Button(master=self.main_frame, text= "Exit", font = ("Arial", 15), command = self.close)
@@ -84,18 +84,39 @@ class SimpleGui():
         self.data_frame = Frame(master = self.main_frame, background="white", relief=GROOVE, borderwidth=3)
         self.data_frame.grid(row=0,column=0, ipady=5)
 
-        model_and_sn_label = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
+        
+        sn_label = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
+        model = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
         device_state_label = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
         active_power_label = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
         e_today_label = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
         e_total_label = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
         error_code_label = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
-        model_and_sn_label.grid(row=0, column=0,ipadx=20,ipady=5 )
-        device_state_label.grid(row=1, column=0,ipadx=20,ipady=5)
-        active_power_label.grid(row=2, column=0,ipadx=20, ipady=5)
-        e_today_label.grid(row=3, column=0,ipadx=20, ipady=5)
-        e_total_label.grid(row=4, column=0,ipadx=20, ipady=5)
-        error_code_label.grid(row=5, column=0,ipadx=20)
+        
+        label_1 = Label(master= self.data_frame, text = "SN: ", font = ("Arial", 12), bg="white")
+        label_1.grid(row=0, column=0,ipadx=20,ipady=5 )
+        label_2 = Label(master= self.data_frame, text = "Model: ", font = ("Arial", 12), bg="white")
+        label_2.grid(row=1, column=0,ipadx=20,ipady=5 )
+        label_3 = Label(master= self.data_frame, text = "Device Status: ", font = ("Arial", 12), bg="white")
+        label_3.grid(row=2, column=0,ipadx=20,ipady=5 )
+        label_4 = Label(master= self.data_frame, text = "Active Power: ", font = ("Arial", 12), bg="white")
+        label_4.grid(row=3, column=0,ipadx=20,ipady=5 )
+        label_5 = Label(master= self.data_frame, text = "E-Today: ", font = ("Arial", 12), bg="white")
+        label_5.grid(row=4, column=0,ipadx=20,ipady=5 )
+        label_6 = Label(master= self.data_frame, text = "E-Total: ", font = ("Arial", 12), bg="white")
+        label_6.grid(row=5, column=0,ipadx=20,ipady=5 )
+        label_7 = Label(master= self.data_frame, text = "Current Error Code: ", font = ("Arial", 12), bg="white")
+        label_7.grid(row=6, column=0,ipadx=20,ipady=5 )
+
+
+
+        sn_label.grid(row=0, column=1,ipadx=20,ipady=5 )
+        model.grid(row=1, column=1,ipadx=20,ipady=5 )
+        device_state_label.grid(row=2, column=1,ipadx=20,ipady=5)
+        active_power_label.grid(row=3, column=1,ipadx=20, ipady=5)
+        e_today_label.grid(row=4, column=1,ipadx=20, ipady=5)
+        e_total_label.grid(row=5, column=1,ipadx=20, ipady=5)
+        error_code_label.grid(row=6, column=1,ipadx=20)
         
         self.monitoring_frame = Frame(master=self.main_frame) #frame object used only to cancel refreshing, I know it's stupid
         button_frame = Frame(master=self.main_frame, background="#f0f0f0")
@@ -110,11 +131,9 @@ class SimpleGui():
         ac_button = Button(master=button_frame, text= "AC", font = ("Arial", 10), command = self.AC_monitoring, width=10)
         ac_button.grid(row=0,column=2, pady=20, ipadx= 5)
 
-
         self.back_button = Button(master=button_frame, text= "Main menu", font = ("Arial", 10), command = self.back, width=10)
         self.back_button.grid(row=1,column=1)
 
-        
         self.update_monitoring_data_1()
 
     def generate_others_menu(self):
@@ -285,7 +304,7 @@ class SimpleGui():
             self.output_box.insert("end", "L1: (V)" + str(ac_voltage["L1"]) + "L2 (V): " + str(ac_voltage["L2"]) + "L2 (V): " + str(ac_voltage["L3"]))
             del ac_voltage
 
-            #Bus voltage
+            #Grid Frequency
             self.output_box.insert("end", "Grid frequency (Hz): " + str(self.client.read_grid_freq(self.slave_address)) + "\n")
             
             #AC current
@@ -365,9 +384,9 @@ class SimpleGui():
         title_label_1 = Label(master= self.data_frame, text="AC Voltage (V)", font = ("Arial", 12), bg="white")
         title_label_2 = Label(master= self.data_frame, text="AC Current (A)", font = ("Arial", 12), bg="white")
         title_label_3 = Label(master= self.data_frame, text="AC Frequency (Hz)", font = ("Arial", 12), bg="white")
-        V_label = Label(master= self.data_frame, text="dddddddddddddddddddddddddddddddddddddddddddddddd", font = ("Arial", 10), bg="white")
-        A_label = Label(master= self.data_frame, text="dddddddddddddddddddddddddddddddddddddddddddddddd", font = ("Arial", 10), bg="white")
-        HZ_label = Label(master= self.data_frame, text="dddddddddddddddddddddddddddddddddddddddddddddddd", font = ("Arial", 10), bg="white")
+        V_label = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
+        A_label = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
+        HZ_label = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
 
         title_label_1.grid(row=0, column=0,ipadx=20,ipady=5)
         V_label.grid(row=1, column=0,ipadx=20,ipady=5)
@@ -408,10 +427,10 @@ class SimpleGui():
 
         title_label_1 = Label(master= self.data_frame, text="PV Voltage (V)", font = ("Arial", 12), bg="white")
         title_label_2 = Label(master= self.data_frame, text="PV Current (A)", font = ("Arial", 12), bg="white")
-        V_label_1 = Label(master= self.data_frame, text="dddddddddddddddddddddddddddddddddddddddddddddddd", font = ("Arial", 10), bg="white")
-        V_label_2 = Label(master= self.data_frame, text="dddddddddddddddddddddddddddddddddddddddddddddddd", font = ("Arial", 10), bg="white")
-        A_label_1 = Label(master= self.data_frame, text="dddddddddddddddddddddddddddddddddddddddddddddddd", font = ("Arial", 10), bg="white")
-        A_label_2 = Label(master= self.data_frame, text="dddddddddddddddddddddddddddddddddddddddddddddddd", font = ("Arial", 10), bg="white")
+        V_label_1 = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
+        V_label_2 = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
+        A_label_1 = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
+        A_label_2 = Label(master= self.data_frame, font = ("Arial", 10), bg="white")
         title_label_1.grid(row=0, column=0,ipadx=20,ipady=5)
         V_label_1.grid(row=1, column=0,ipadx=20,ipady=5)
         V_label_2.grid(row=2, column=0,ipadx=20,ipady=5)
@@ -444,24 +463,59 @@ class SimpleGui():
         #TODO PROBABLY NEED TO CHANGE THE WAY DATA IS BEING REFRESHED, good enough for now: its 2AM
         self.data_frame.update_idletasks()
         print("UPDATING DATA")
+
+        try:
+            sn_number = self.client.read_serial_number(self.slave_address)
+            model = self.client.read_machine_type(self.slave_address)
+            device_state = self.read_device_state(self.slave_address)
+            active_power = self.read_active_power(self.slave_address)
+            e_today = self.read_e_today(self.slave_address)
+            e_total = self.read_e_total(self.slave_address)
+            error_code = self.read_error_message(self.slave_address)
+        except:
+            sn_number = "N/A"
+            model = "N/A"
+            device_state = "N/A"
+            active_power = "N/A"
+            e_today = "N/A"
+            e_total = "N/A"
+            error_code = "N/A"
+
         to_update = self.data_frame.winfo_children()
-        to_update[0]["text"] = "SN: " + "LM08K09S22503221" + ", Model: " + "ASW8KH-T1"
-        to_update[1]["text"] = "Device state: " + "normal"
-        to_update[2]["text"] = "Active power: " + str(randint(500,700))
-        to_update[3]["text"] = "E-today: " + str(randint(3,10))
-        to_update[4]["text"] = "E-total: " + str(randint(33,700))
-        to_update[5]["text"] = "Error code: " + str(randint(0,99))
+        to_update[0]["text"] = sn_number
+        to_update[1]["text"] = model
+        to_update[2]["text"] = device_state
+        to_update[3]["text"] = str(active_power) + " W"
+        to_update[4]["text"] = str(e_today) + " kWh"
+        to_update[5]["text"] = str(e_total) + " kWh"
+        to_update[6]["text"] = str(error_code)
         
         self.monitoring_frame.after(3000, self.update_monitoring_data_1)
 
     def update_monitoring_data_2(self):
         self.data_frame.update_idletasks()
         print("UPDATING DATA PV")
+
         to_update = self.data_frame.winfo_children()
-        to_update[2]["text"] = "PV1: " + str(randint(1000,2000)) + "   PV2: " + str(randint(1000,2000)) + "   PV3: " + str(randint(1000,2000)) + "   PV4: " + str(randint(1000,2000)) + "   PV5: " + str(randint(1000,2000))
-        to_update[3]["text"] = "PV6: " + str(randint(1000,2000)) + "   PV7: " + str(randint(1000,2000)) + "   PV8: " + str(randint(1000,2000)) + "   PV9: " + str(randint(1000,2000)) + "   PV10: " + str(randint(1000,2000))
-        to_update[4]["text"] = "PV1: " + str(randint(1000,2000)) + "   PV2: " + str(randint(1000,2000)) + "   PV3: " + str(randint(1000,2000)) + "   PV4: " + str(randint(1000,2000)) + "   PV5: " + str(randint(1000,2000))
-        to_update[5]["text"] = "PV6: " + str(randint(1000,2000)) + "   PV7: " + str(randint(1000,2000)) + "   PV8: " + str(randint(1000,2000)) + "   PV9: " + str(randint(1000,2000)) + "   PV10: " + str(randint(1000,2000))
+        #voltage
+        try:
+            pv_voltage = self.client.read_dc_voltage(self.slave_address)
+        except:
+            pv_voltage = [0,0,0,0,0,0,0,0,0,0]
+
+        to_update[2]["text"] = "PV1: " + str(pv_voltage[0]) + "   PV2: " + str(pv_voltage[1]) + "   PV3: " + str(pv_voltage[2]) + "   PV4: " + str(pv_voltage[3]) + "   PV5: " + str(pv_voltage[4])
+        to_update[3]["text"] = "PV6: " + str(pv_voltage[5]) + "   PV7: " + str(pv_voltage[6]) + "   PV8: " + str(pv_voltage[7]) + "   PV9: " + str(pv_voltage[8]) + "   PV10: " + str(pv_voltage[9])
+        del pv_voltage
+        
+        #current
+        try:
+            pv_current = self.client.read_dc_current(self.slave_address)
+        except:
+            pv_current = [0,0,0,0,0,0,0,0,0,0]
+
+        to_update[4]["text"] = "PV1: " + str(pv_current[0]) + "   PV2: " + str(pv_current[1]) + "   PV3: " + str(pv_current[2]) + "   PV4: " + str(pv_current[3]) + "   PV5: " + str(pv_current[4])
+        to_update[5]["text"] = "PV6: " + str(pv_current[5]) + "   PV7: " + str(pv_current[6]) + "   PV8: " + str(pv_current[7]) + "   PV9: " + str(pv_current[8]) + "   PV10: " + str(pv_current[9])
+        del pv_current
 
         self.monitoring_frame.after(3000, self.update_monitoring_data_2)
 
@@ -469,9 +523,25 @@ class SimpleGui():
         self.data_frame.update_idletasks()
         print("UPDATING DATA AC")
         to_update = self.data_frame.winfo_children()
-        to_update[3]["text"] = "L1: " + str(randint(230,250)) + "   L2: " + str(randint(230,250)) + "   L3: " + str(randint(230,250))
-        to_update[4]["text"] = "L1: " + str(randint(0,5)) + "   L2: " + str(randint(0,10)) + "   L3: " + str(randint(0,7))
-        to_update[5]["text"] = "Frequency: " + str(randint(49,51))
+        try: 
+            ac_voltage = self.client.read_ac_voltage(self.slave_address)
+        except:
+            ac_voltage = {"L1" : 0, "L2" : 0, "L3" : 0}
+        to_update[3]["text"] = "L1: " + str(ac_voltage["L1"]) + "   L2: " + str(ac_voltage["L2"]) + "   L3: " + str(ac_voltage["L3"])
+        del ac_voltage
+
+        try: 
+            ac_current = self.client.read_ac_current(self.slave_address)
+        except:
+            ac_current = {"L1" : 0, "L2" : 0, "L3" : 0}
+        to_update[4]["text"] = "L1: " + str(ac_current["L1"]) + "   L2: " + str(ac_current["L2"]) + "   L3: " + str(ac_current["L3"])
+        del ac_current
+
+        try:
+            freq = self.client.read_grid_freq(self.slave_address)
+        except:
+            freq = 0
+        to_update[5]["text"] = "Frequency: " + str(freq)
 
         self.monitoring_frame.after(3000, self.update_monitoring_data_3)
     
