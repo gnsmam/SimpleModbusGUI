@@ -23,3 +23,9 @@ After the Python is installed, run below command in the terminal.
 
 Download and unpack the Linux folder from the repository. <br>
 Navigate to location of downloaded folder in the terminal and run the app with "sudo" privileges.
+
+## Licensing, info, disclaimer of liability
+
+This software is not affiliated with any company or organization. It has been created for private use only and originated as an independent side project of the creator. The software is not intended for commercial or professional use and is provided without guarantee of technical support.
+
+The creator assumes no responsibility for any damage, loss or problems arising from the use of this software. The software is provided on an “as-is” (“as-is”) basis, without warranty of any kind, expressed or implied, including any warranty of merchantability or fitness for a particular purpose. You use the software at your own risk and are fully responsible for its use.
