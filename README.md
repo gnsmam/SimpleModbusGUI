@@ -1,7 +1,7 @@
 # SimpleModbusGUI - Input_Registers
 
 Simple Modbus GUI for reading Input_Registers from inverters.
-
+<br>Keep in mind that, for now, this piece of software is not very rich in regard to Error handling, make sure provided COM port and Modbus address are correct.
 ## Installation Windows
 
 <b>Windows:</b> install Python 3.12 version (the easiest way is Microsoft Store).  <br>
