@@ -61,7 +61,7 @@ class SimpleGui():
 
         self.delete_all_onscreen_widgets()
         button1 = Button(master=self.main_frame, text="Simple Monitoring", font = ("Arial", 15), command=self.Simple_monitoring_button) #!button
-        button2 = Button(master=self.main_frame,  text="Other functions", font = ("Arial", 15), command=self.Other_functions_button) #!button2
+        button2 = Button(master=self.main_frame,  text="Other Functions", font = ("Arial", 15), command=self.Other_functions_button) #!button2
         button1.grid(row=0, column=0, pady=5)
         button2.grid(row=1, column=0, pady=5)
         close_button = Button(master=self.main_frame, text= "Exit", font = ("Arial", 15), command = self.close)
