@@ -340,7 +340,7 @@ class SimpleGui():
         self.output_box.insert("end", "###########\n")
         try:
             response = self.client.send_request_ir(address = int(add_to_read.get()), slave=self.slave_address, count = int(count_to_read.get()))
-            self.output_box.insert("end", "Customer read result (not formatted):\n")
+            self.output_box.insert("end", "Custom read result (not formatted):\n")
             for reg in response:
                 self.output_box.insert("end", str(reg) + "\n")
             
