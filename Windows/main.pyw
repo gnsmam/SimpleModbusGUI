@@ -181,7 +181,7 @@ class SimpleGui():
         custom_register_entry = Entry(master=custom_register_frame, font = ("Arial", 10))
         custom_register_entry.grid(row=2, column=0, pady=5, padx=2.5)
         
-        custom_count_label = Label(master= custom_register_frame, text=("Register count:"), bg="white")
+        custom_count_label = Label(master= custom_register_frame,   text=("Register count:"), bg="white")
         custom_count_label.grid(row=1, column=1, pady=5, padx=2.5)
         custom_count_entry = Entry(master=custom_register_frame, font = ("Arial", 10))
         custom_count_entry.grid(row=2, column=1, pady=5, padx=2.5)

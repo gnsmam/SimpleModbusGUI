@@ -16,7 +16,7 @@ class Solplanet_Serial_Modbus(ModbusSerialClient):
 
     def read_serial_number(self, device_address = 3):
         serial_number = self.send_request_ir(31003,16, slave = device_address) 
-        return self.decode_string(serial_number)
+        return self.decode_string(serial_number)[:16]
 
     def read_machine_type(self, device_address = 3): 
         """Returns a string with inverter model"""

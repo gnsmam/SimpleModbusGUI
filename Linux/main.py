@@ -9,7 +9,7 @@ class SimpleGui():
 
     def __init__(self):
 
-        self.port = ""
+        self.port = ''
         self.slave_address = 0
         self.backup_address = 0
 
@@ -22,8 +22,6 @@ class SimpleGui():
         
         self.input_window_startup()
 
-        self.client = Solplanet_Serial_Modbus(s_port = self.port)
-               
         self.main_window.mainloop() #place window, listen for events    
     
     def input_window_startup(self):
@@ -51,6 +49,9 @@ class SimpleGui():
         self.slave_address = int(address.get())
         self.backup_address = self.slave_address
         self.port = port.get()
+
+        self.client = Solplanet_Serial_Modbus(s_port = self.port)
+
         self.generate_main_menu()
 
     def generate_main_menu(self):
@@ -110,7 +111,7 @@ class SimpleGui():
 
 
 
-        sn_label.grid(row=0, column=1,ipadx=20,ipady=5 )
+        sn_label.grid(row=0, column=1,ipadx=20,ipady=5)
         model.grid(row=1, column=1,ipadx=20,ipady=5 )
         device_state_label.grid(row=2, column=1,ipadx=20,ipady=5)
         active_power_label.grid(row=3, column=1,ipadx=20, ipady=5)
@@ -180,7 +181,7 @@ class SimpleGui():
         custom_register_entry = Entry(master=custom_register_frame, font = ("Arial", 10))
         custom_register_entry.grid(row=2, column=0, pady=5, padx=2.5)
         
-        custom_count_label = Label(master= custom_register_frame, text=("Register count:"), bg="white")
+        custom_count_label = Label(master= custom_register_frame,   text=("Register count:"), bg="white")
         custom_count_label.grid(row=1, column=1, pady=5, padx=2.5)
         custom_count_entry = Entry(master=custom_register_frame, font = ("Arial", 10))
         custom_count_entry.grid(row=2, column=1, pady=5, padx=2.5)
@@ -277,44 +278,44 @@ class SimpleGui():
         try:
             #PV voltage
             pv_voltage = self.client.read_dc_voltage(self.slave_address)
-            self.output_box.insert("end", "\nMPPT Voltage: \n")
-            self.output_box.insert("end", "MPPT1 (V): " + str(pv_voltage[0]) + "MPPT2 (V): " + str(pv_voltage[1]) + "MPPT3 (V): " + str(pv_voltage[2] + "MPPT4 (V): " + str(pv_voltage[3])) + "MPPT5 (V): " + str(pv_voltage[4])+ "\n")
-            self.output_box.insert("end", "MPPT6 (V): " + str(pv_voltage[5]) + "MPPT7 (V): " + str(pv_voltage[6]) + "MPPT8 (V): " + str(pv_voltage[7] + "MPPT9 (V): " + str(pv_voltage[8])) + "MPPT10 (V): " + str(pv_voltage[9]))
+            self.output_box.insert("end", "MPPT Voltage: \n")
+            self.output_box.insert("end", "MPPT1 (V): " + str(pv_voltage[0]) + " MPPT2 (V): " + str(pv_voltage[1]) + "\nMPPT3 (V): " + str(pv_voltage[2]) + " MPPT4 (V): " + str(pv_voltage[3]) + "\nMPPT5 (V): " + str(pv_voltage[4]))
+            self.output_box.insert("end", " MPPT6 (V): " + str(pv_voltage[5]) + "\nMPPT7 (V): " + str(pv_voltage[6]) + " MPPT8 (V): " + str(pv_voltage[7]) + "\nMPPT9 (V): " + str(pv_voltage[8]) + " MPPT10 (V): " + str(pv_voltage[9]))
             del pv_voltage
             
             #PV current
             pv_current = self.client.read_dc_current(self.slave_address)
             self.output_box.insert("end", "\nMPPT Current: \n")
-            self.output_box.insert("end", "MPPT1 (A): " + str(pv_current[0]) + "MPPT2 (A): " + str(pv_current[1]) + "MPPT3 (A): " + str(pv_current[2] + "MPPT4 (A): " + str(pv_current[3])) + "MPPT5 (A): " + str(pv_current[4])+ "\n")
-            self.output_box.insert("end", "MPPT6 (A): " + str(pv_current[5]) + "MPPT7 (A): " + str(pv_current[6]) + "MPPT8 (A): " + str(pv_current[7] + "MPPT9 (A): " + str(pv_current[8])) + "MPPT10 (A): " + str(pv_current[9]))
+            self.output_box.insert("end", "MPPT1 (A): " + str(pv_current[0]) + " MPPT2 (A): " + str(pv_current[1]) + "\nMPPT3 (A): " + str(pv_current[2]) + " MPPT4 (A): " + str(pv_current[3]) + "\nMPPT5 (A): " + str(pv_current[4]))
+            self.output_box.insert("end", " MPPT6 (A): " + str(pv_current[5]) + "\nMPPT7 (A): " + str(pv_current[6]) + " MPPT8 (A): " + str(pv_current[7]) + "\nMPPT9 (A): " + str(pv_current[8]) + " MPPT10 (A): " + str(pv_current[9]))
             del pv_current
 
             #String current
             pv_current = self.client.read_string_current(self.slave_address)
-            self.output_box.insert("end", "\nMPPT Current: \n")
-            self.output_box.insert("end", "String 1 (A): " + str(pv_current[0]) + "String 2 (A): " + str(pv_current[1]) + "String 3 (A): " + str(pv_current[2] + "String 4 (A): " + str(pv_current[3])) + "String 5 (A): " + str(pv_current[4])+ "\n")
-            self.output_box.insert("end", "String 6 (A): " + str(pv_current[5]) + "String 7 (A): " + str(pv_current[6]) + "String 8 (A): " + str(pv_current[7] + "String 9 (A): " + str(pv_current[8])) + "String 10 (A): " + str(pv_current[9])+ "\n")
-            self.output_box.insert("end", "String 11 (A): " + str(pv_current[10]) + "String 12 (A): " + str(pv_current[11]) + "String 13 (A): " + str(pv_current[12] + "String 14 (A): " + str(pv_current[13])) + "String 15 (A): " + str(pv_current[14])+ "\n")
-            self.output_box.insert("end", "String 16 (A): " + str(pv_current[15]) + "String 17 (A): " + str(pv_current[16]) + "String 18 (A): " + str(pv_current[17] + "String 19 (A): " + str(pv_current[18])) + "String 20 (A): " + str(pv_current[19]))
+            self.output_box.insert("end", "\nString Current: \n")
+            self.output_box.insert("end", "String 1 (A): " + str(pv_current[0]) + " String 2 (A): " + str(pv_current[1]) + "\nString 3 (A): " + str(pv_current[2]) + " String 4 (A): " + str(pv_current[3]) + "\nString 5 (A): " + str(pv_current[4]))
+            self.output_box.insert("end", " String 6 (A): " + str(pv_current[5]) + "\nString 7 (A): " + str(pv_current[6]) + " String 8 (A): " + str(pv_current[7]) + "\nString 9 (A): " + str(pv_current[8]) + " String 10 (A): " + str(pv_current[9]))
+            self.output_box.insert("end", "\nString 11 (A): " + str(pv_current[10]) + " String 12 (A): " + str(pv_current[11]) + "\nString 13 (A): " + str(pv_current[12]) + " String 14 (A): " + str(pv_current[13]) + "\nString 15 (A): " + str(pv_current[14]))
+            self.output_box.insert("end", " String 16 (A): " + str(pv_current[15]) + "\nString 17 (A): " + str(pv_current[16]) + " String 18 (A): " + str(pv_current[17]) + "\nString 19 (A): " + str(pv_current[18]) + " String 20 (A): " + str(pv_current[19]))
             del pv_current
 
             #AC voltage
             ac_voltage = self.client.read_ac_voltage(self.slave_address)
             self.output_box.insert("end", "\nAC Voltage: \n")
-            self.output_box.insert("end", "L1: (V)" + str(ac_voltage["L1"]) + "L2 (V): " + str(ac_voltage["L2"]) + "L2 (V): " + str(ac_voltage["L3"]))
+            self.output_box.insert("end", "L1: (V)" + str(ac_voltage["L1"]) + "\nL2 (V): " + str(ac_voltage["L2"]) + "\nL3 (V): " + str(ac_voltage["L3"]))
             del ac_voltage
 
             #Grid Frequency
-            self.output_box.insert("end", "Grid frequency (Hz): " + str(self.client.read_grid_freq(self.slave_address)) + "\n")
+            self.output_box.insert("end", "\nGrid frequency (Hz): " + str(self.client.read_grid_freq(self.slave_address)) + "\n")
             
             #AC current
             ac_current = self.client.read_ac_current(self.slave_address)
             self.output_box.insert("end", "AC Current: \n")
-            self.output_box.insert("end", "L1: (A)" + str(ac_current["L1"]) + "L2 (A): " + str(ac_current["L2"]) + "L2 (A): " + str(ac_current["L3"]))
+            self.output_box.insert("end", "L1: (A)" + str(ac_current["L1"]) + "\nL2 (A): " + str(ac_current["L2"]) + "\nL3 (A): " + str(ac_current["L3"]))
             del ac_current
 
             #Internal temp
-            self.output_box.insert("end", "Internal temp (C): " + str(self.client.read_internal_temp(self.slave_address)) + "\n")
+            self.output_box.insert("end", "\nInternal temp (C): " + str(self.client.read_internal_temp(self.slave_address)) + "\n")
 
             #Bus voltage
             self.output_box.insert("end", "Bus voltage (V): " + str(self.client.read_bus_voltage(self.slave_address)) + "\n")
@@ -331,7 +332,7 @@ class SimpleGui():
             #Power factor
             self.output_box.insert("end", "Power factor: " + str(self.client.read_power_factor(self.slave_address)) + "\n")
         except:
-            self.output_box.insert("end", "Connection failure\n")
+            self.output_box.insert("end", "Connection/read failure\n")
         self.output_box.configure(state="disabled")
 
     def read_custom_register(self, add_to_read, count_to_read):
@@ -461,17 +462,17 @@ class SimpleGui():
 
     def update_monitoring_data_1(self):
         #TODO PROBABLY NEED TO CHANGE THE WAY DATA IS BEING REFRESHED, good enough for now: its 2AM
-        self.data_frame.update_idletasks()
+        
         print("UPDATING DATA")
 
         try:
             sn_number = self.client.read_serial_number(self.slave_address)
             model = self.client.read_machine_type(self.slave_address)
-            device_state = self.read_device_state(self.slave_address)
-            active_power = self.read_active_power(self.slave_address)
-            e_today = self.read_e_today(self.slave_address)
-            e_total = self.read_e_total(self.slave_address)
-            error_code = self.read_error_message(self.slave_address)
+            device_state = self.client.read_device_state(self.slave_address)
+            active_power = self.client.read_active_power(self.slave_address)
+            e_today = self.client.read_e_today(self.slave_address)
+            e_total = self.client.read_e_total(self.slave_address)
+            error_code = self.client.read_error_message(self.slave_address)
         except:
             sn_number = "N/A"
             model = "N/A"
@@ -489,11 +490,11 @@ class SimpleGui():
         to_update[4]["text"] = str(e_today) + " kWh"
         to_update[5]["text"] = str(e_total) + " kWh"
         to_update[6]["text"] = str(error_code)
-        
-        self.monitoring_frame.after(3000, self.update_monitoring_data_1)
+        self.data_frame.update_idletasks()
+        self.monitoring_frame.after(5000, self.update_monitoring_data_1)
 
     def update_monitoring_data_2(self):
-        self.data_frame.update_idletasks()
+        
         print("UPDATING DATA PV")
 
         to_update = self.data_frame.winfo_children()
@@ -516,11 +517,10 @@ class SimpleGui():
         to_update[4]["text"] = "PV1: " + str(pv_current[0]) + "   PV2: " + str(pv_current[1]) + "   PV3: " + str(pv_current[2]) + "   PV4: " + str(pv_current[3]) + "   PV5: " + str(pv_current[4])
         to_update[5]["text"] = "PV6: " + str(pv_current[5]) + "   PV7: " + str(pv_current[6]) + "   PV8: " + str(pv_current[7]) + "   PV9: " + str(pv_current[8]) + "   PV10: " + str(pv_current[9])
         del pv_current
-
+        self.data_frame.update_idletasks()
         self.monitoring_frame.after(3000, self.update_monitoring_data_2)
 
     def update_monitoring_data_3(self):
-        self.data_frame.update_idletasks()
         print("UPDATING DATA AC")
         to_update = self.data_frame.winfo_children()
         try: 
@@ -544,5 +544,6 @@ class SimpleGui():
         to_update[5]["text"] = "Frequency: " + str(freq)
 
         self.monitoring_frame.after(3000, self.update_monitoring_data_3)
+        self.data_frame.update_idletasks()
     
 SimpleGui()
